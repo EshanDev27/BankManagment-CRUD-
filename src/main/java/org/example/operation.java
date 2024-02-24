@@ -22,7 +22,8 @@ public class operation {
         }
     }
 
-    public void new_acc() throws SQLException {
+    public int new_acc() throws SQLException {
+        int acc_no = 0;
         System.out.println("Enter your Name");
         name = sc.nextLine();
         System.out.println("Enter your Account Balance");
@@ -34,6 +35,15 @@ public class operation {
 
         preparedStatement.executeUpdate();
         System.out.println("*********Data has been Inserted**************");
+        query = "SELECT acc_no FROM account WHERE name = ?;";
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1,name);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next()){
+            acc_no = resultSet.getInt(1);
+        }
+
+        return acc_no;
     }
 
     public void check_bal(int accNo) throws SQLException {
@@ -69,5 +79,16 @@ public class operation {
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         System.out.println("Account has been successfully Deleted");
+    }
+
+    public void acc_details(int accNo) throws SQLException {
+        String query = "SELECT * FROM account where acc_no = ?";
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, accNo);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next()){
+            System.out.println("Account number : " + resultSet.getInt(1) + "\nName : " + resultSet.getString(2) + "\nBalance : " + resultSet.getInt(3));
+        }
+
     }
 }

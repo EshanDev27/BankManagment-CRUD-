@@ -3,11 +3,6 @@ package org.example;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
-
 public class App 
 {
     public static void main( String[] args ) throws SQLException {
@@ -19,12 +14,12 @@ public class App
         if(active == 'y' || active == 'Y'){
             System.out.println("Enter your account number");
             acc_no = sc.nextInt();
-            System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account");
+            System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account\n5. To fetch details of the account");
             choice = sc.nextInt();
             sc.nextLine();
         }else if(active == 'n' || active == 'N'){
             op.new_acc();
-            System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account");
+            System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account\n5. To fetch details of the account");
             choice = sc.nextInt();
             sc.nextLine();
         }else{
@@ -41,8 +36,13 @@ public class App
                     break;
                 case 3:
                     op.deposit(acc_no);
+                    break;
                 case 4:
                     op.delete_acc(acc_no);
+                    break;
+                case 5:
+                    op.acc_details(acc_no);
+                    break;
                 default:
                     System.out.println("Enter Valid Choice");
                     break;
@@ -53,16 +53,16 @@ public class App
                 System.out.println("Enter your account number");
 //                while(choice != 0)
                 acc_no = sc.nextInt();
-                System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account\n0. To exit application");
+                System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account\n5. To fetch details of the account\n0. To exit application");
                 choice = sc.nextInt();
                 sc.nextLine();
             }else if(active == 'n' || active == 'N'){
-                System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account");
+                System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account\n5. To fetch details of the account\n0. To exit application");
                 choice = sc.nextInt();
                 sc.nextLine();
             } else if (active == 'A' || active == 'a') {
-                op.new_acc();
-                System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account");
+                acc_no = op.new_acc();
+                System.out.println("1. Check Balance\n2. Withdraw Money\n3. Deposit Money\n4. Delete Account\n5. To fetch details of the account\n0. To exit application");
                 choice = sc.nextInt();
                 sc.nextLine();
             } else{
@@ -70,6 +70,5 @@ public class App
                 System.exit(0);
             }
         }
-
     }
 }
